@@ -140,8 +140,8 @@
 						}, duration / 2);
 					}
 				}).appendTo(this.amPmBlock);
-				
-				
+
+
 			$('<button type="button" class="btn btn-sm btn-default clockpicker-button pm-button">' + "PM" + '</button>')
 				.on("click", function() {
 					self.amOrPm = 'PM';
@@ -153,9 +153,9 @@
 						}, duration / 2);
 					}
 				}).appendTo(this.amPmBlock);
-				
+
 		}
-		
+
 		if (! options.autoclose) {
 			// If autoclose is not setted, append a button
 			$('<button type="button" class="btn btn-sm btn-default btn-block clockpicker-button">' + options.donetext + '</button>')
@@ -468,16 +468,16 @@
 		// Place the popover
 		switch (placement) {
 			case 'bottom':
-				styles.top = offset.top + height;
+				styles.top = height;
 				break;
 			case 'right':
-				styles.left = offset.left + width;
+				styles.left = width;
 				break;
 			case 'top':
-				styles.top = offset.top - popover.outerHeight();
+				styles.top = -popover.outerHeight();
 				break;
 			case 'left':
-				styles.left = offset.left - popover.outerWidth();
+				styles.left = -popover.outerWidth();
 				break;
 			case 'viewport-top':
 				styles.top = offset.top - element[0].getBoundingClientRect().top;
@@ -487,16 +487,16 @@
 		// Align the popover arrow
 		switch (align) {
 			case 'left':
-				styles.left = offset.left;
+				styles.left = 0;
 				break;
 			case 'right':
-				styles.left = offset.left + width - popover.outerWidth();
+				styles.left = width - popover.outerWidth();
 				break;
 			case 'top':
-				styles.top = offset.top;
+				styles.top = 0;
 				break;
 			case 'bottom':
-				styles.top = offset.top + height - popover.outerHeight();
+				styles.top = height - popover.outerHeight();
 				break;
 		}
 
@@ -544,7 +544,7 @@
 		// Initialize
 		if (! this.isAppended) {
 			// Append popover to body
-			$body = $(document.body).append(this.popover);
+			$body = $(this.element).append(this.popover);
 
 			// Reset position when resize
 			$win.on('resize.clockpicker' + this.id, function(){
@@ -555,13 +555,13 @@
 
 			this.isAppended = true;
 		}
-		
+
 		// Get the time from the input field
 		this.parseInputValue();
-		
+
 		this.spanHours.html(leadingZero(this.hours));
 		this.spanMinutes.html(leadingZero(this.minutes));
-		
+
 		if (this.options.twelvehour) {
 			this.spanAmPm.empty().append(this.amOrPm);
 		}
@@ -790,7 +790,7 @@
 		var last = this.input.prop('value'),
 			outHours = this.hours,
 			value = ':' + leadingZero(this.minutes);
-		
+
 		if (this.isHTML5 && this.options.twelvehour) {
 			if (this.hours < 12 && this.amOrPm === 'PM') {
 				outHours += 12;
@@ -799,16 +799,16 @@
 				outHours = 0;
 			}
 		}
-		
+
 		value = leadingZero(outHours) + value;
-		
+
 		if (!this.isHTML5 && this.options.twelvehour) {
 			value = value + this.amOrPm;
 		}
-		
+
 		this.input.prop('value', value);
 		if (value !== last) {
-			this.input.triggerHandler('change');
+			this.input.trigger('change');
 			if (! this.isInput) {
 				this.element.trigger('change');
 			}
