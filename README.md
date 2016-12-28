@@ -151,6 +151,10 @@ gulp
 
 ## Change log
 
+0.1.1
+
+* Sticking popover to container to allow usage inside bootstrap modal
+
 0.1.0
 
 * Able to set incremental step for hours and minutes
